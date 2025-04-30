@@ -1,0 +1,10 @@
+<button hx-post="{% url 'jenga_home:like_post' post.id %}" 
+        hx-target="#like-section"
+        hx-swap="outerHTML"
+        class="button is-primary {% if liked %}is-liked{% endif %}"
+        id="like-section">
+  <span class="icon">
+    <i class="fas fa-heart"></i>
+  </span>
+  <span>Like (<span hx-swap-oob="true">{{ post.likes.count }}</span>)</span>
+</button>

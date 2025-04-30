@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<section class="section ">
+    <div class="container ">
+        <div class="columns is-centered ">
+            <div class="column is-8 has-text-white" >
+                <div class="container has-text-white">
+                    <h1 class="title is-2 has-text-centered has-text-primary">Contact us</h1>
+                    <p class="subtitle is-4 has-text-centered mb-6 has-text-white">
+                        Do you want to know more about how Thinking Post Training works in practice?
+                        Or are you interested in learning how we could improve your current training process?
+                        Contact us for a demo.
+                    </p>
+
+                    <div class="columns">
+                        <div class="column is-6">
+                            <div class="box">
+                                <h2 class="title is-4">Get in touch</h2>
+                                <div class="mb-4">
+                                    <span class="icon-text">
+                                        <span class="icon">
+                                            <i class="fas fa-phone"></i>
+                                        </span>
+                                        <span>Call us at +254 724 501 565</span>
+                                    </span>
+                                </div>
+                                <div class="mb-4">
+                                    <span class="icon-text">
+                                        <span class="icon">
+                                            <i class="fas fa-envelope"></i>
+                                        </span>
+                                        <span>E-mail: info@thinkingpost.com</span>
+                                    </span>
+                                </div>
+                                <div class="mb-4">
+                                    <span class="icon-text">
+                                        <span class="icon">
+                                            <i class="fas fa-map-marker-alt"></i>
+                                        </span>
+                                        <span>Thinking Post Training<br>Nairobi, Kenya</span>
+                                    </span>
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                        <div class="column is-6">
+                            <form method="post">
+                                {% csrf_token %}
+                                <div class="field">
+                                    <label class="label has-text-white">Request Type</label>
+                                    <div class="control">
+                                        <div class="select is-fullwidth">
+                                            <select name="request_type" required>
+                                                <option value="">Select an option</option>
+                                                <option value="Demo Request">Demo Request</option>
+                                                <option value="Training Inquiry">Training Inquiry</option>
+                                                <option value="Partnership">Partnership</option>
+                                                <option value="Other">Other</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="field">
+                                    <label class="label has-text-white">Name</label>
+                                    <div class="control">
+                                        <input class="input" type="text" name="name" required>
+                                    </div>
+                                </div>
+
+                                <div class="field">
+                                    <label class="label has-text-white">E-mail</label>
+                                    <div class="control">
+                                        <input class="input" type="email" name="email" required>
+                                    </div>
+                                </div>
+
+                                <div class="field">
+                                    <label class="label has-text-white">Phone</label>
+                                    <div class="control">
+                                        <input class="input" type="tel" name="phone">
+                                    </div>
+                                </div>
+
+                                <div class="field">
+                                    <label class="label has-text-white">Company</label>
+                                    <div class="control">
+                                        <input class="input" type="text" name="company">
+                                    </div>
+                                </div>
+
+                                <div class="field">
+                                    <label class="label has-text-white">How did you hear about us?</label>
+                                    <div class="control">
+                                        <div class="select is-fullwidth">
+                                            <select name="referral_source">
+                                                <option value="">Select an option</option>
+                                                <option value="Search Engine">Search Engine</option>
+                                                <option value="Social Media">Social Media</option>
+                                                <option value="Referral">Referral</option>
+                                                <option value="Advertisement">Advertisement</option>
+                                                <option value="Other">Other</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="field">
+                                    <label class="label has-text-white">Your message or question</label>
+                                    <div class="control">
+                                        <textarea class="textarea" name="message" rows="5" required></textarea>
+                                    </div>
+                                </div>
+
+                                <div class="field">
+                                    <div class="control">
+                                        <button type="submit" class="button is-primary is-fullwidth">
+                                            <span class="icon">
+                                                <i class="fas fa-paper-plane"></i>
+                                            </span>
+                                            <span>Send Message</span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

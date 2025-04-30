@@ -1,0 +1,16 @@
+<div class="container">
+    <div class=""><span>{{ user.username }}</span></div>
+    <form class="center" method="post" action="{% url 'user_management:logout' %}">
+        {% csrf_token %}
+        
+        <div class="field center">
+            <div class="control">
+                <input class="button is-primary is-rounded is-small" type="submit" value="Logout">
+                <a class="button is-light is-rounded is-small" href="{% url 'user_management:password_change' %}">Change password</a>
+            </div>
+        </div>
+    
+        <input type="hidden" name="next" value="{% url 'jenga_home:home' %}">
+    </form>
+</div>
+

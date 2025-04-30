@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    <div class="has-text-centered my-6">
+      <h1 class="title is-1 is-spaced">Error #404</h1>
+      <h2 class="subtitle is-4">Sorry, the page you're looking for doesn't exist.</h2>
+      <a href="/" class="button is-primary">Go to Homepage</a>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-variable is-5 is-multiline is-mobile">
+      {% for post in recent_posts|slice:":3" %}
+        <div class="column is-one-third-tablet is-full-mobile mb-5">
+          {% include "blog/_post_card.html" %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

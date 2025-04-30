@@ -1,0 +1,32 @@
+{% extends "blog/base_blog.html" %}
+
+{% block title %}Posts tagged "{{ tag.name }}" | Your Site Name{% endblock %}
+
+{% block blog_content %}
+<section class="section">
+  <div class="container">
+    <div class="columns is-vcentered is-mobile mb-5">
+      <div class="column is-narrow">
+        <span class="icon is-large">
+          <i class="fas fa-tag"></i>
+        </span>
+      </div>
+      <div class="column">
+        <h1 class="title is-2">Tag: {{ tag.name }}</h1>
+      </div>
+    </div>
+
+    <div class="columns is-multiline">
+      {% for post in tagged_posts %}
+        <div class="column is-one-third-tablet is-half-mobile">
+          {% include "blog/_post_card.html" %}
+        </div>
+      {% empty %}
+        <div class="column">
+          <p>No posts found with this tag.</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

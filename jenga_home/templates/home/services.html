@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block title %}Services | Thinking Post{% endblock %}
+
+{% block content %}
+{% include "_base_navbar.html" %}
+
+<!-- Hero Section -->
+<section class="hero is-info is-medium">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title is-1">Services</h1>
+      <p class="subtitle is-4">
+        We provide services to every retail sector, AABO support, and support in the catalog process with AAPO creating Services, 
+        including development of AABO Academy for most users.
+      </p>
+      <a class="button is-light is-large" href="#contact">Contact us if you want to learn more</a>
+    </div>
+  </div>
+</section>
+
+<!-- Services Intro -->
+<section class="section">
+  <div class="container">
+    <div class="content has-text-centered">
+      <p class="subtitle is-4">
+        Our services help you and your organization in the daily work of group reporting.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Services List -->
+<section class="section">
+  <div class="container">
+    <div class="columns is-multiline mt-6">
+      <!-- AABO Studio -->
+      <div class="column is-4">
+        <div class="card">
+          <div class="card-content">
+            <h3 class="title is-4">AABO Studio</h3>
+            <p>
+              AABO build is a unique foundation of AABO at a dedicated level. We may not work out IT infrastructure and technically require to run AABO.
+            </p>
+            <a class="button is-text mt-3" href=>Read more →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- AABO Display Services -->
+      <div class="column is-4">
+        <div class="card">
+          <div class="card-content">
+            <h3 class="title is-4">AABO Display Services</h3>
+            <p>
+              AABO Group Services are connected across the board or simply offering expert driving for cutting points, as well as driving the closing.
+            </p>
+            <a class="button is-text mt-3" href=>Read more →</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- AABO Version Management -->
+      <div class="column is-4">
+        <div class="card">
+          <div class="card-content">
+            <h3 class="title is-4">AABO Version Management</h3>
+            <p>
+              VAN AABO Version Management, your AABO installation is available, it comes, and completes with new features, your name.
+            </p>
+            <a class="button is-text mt-3" href=>Read more →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{% include "_contact_form.html" %}
+{% include "_base_footer.html" %}
+{% endblock %}

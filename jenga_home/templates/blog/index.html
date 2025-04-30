@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero is-primary is-medium " style="background: center top/cover url('');">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <h1 class="title is-1 has-text-weight-bold mb-6">
+        Thinking Post Training Blog
+      </h1>
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <p class="subtitle is-4">
+            Thinking Post is your comprehensive partner in accounting training,
+            working closely with you and your team to simplify accounting and power accountability.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section is-flex-grow-1">
+  <div class="content">
+    <div class="category-filter mb-5">
+      <a href="?">All</a>
+      {% for cat in BlogCategory.objects.all %}
+      <a href="?category={{ cat.slug }}" class="tag is-primary">{{ cat.name }}</a>
+      {% endfor %}
+    </div>
+
+    <div class="columns is-variable is-5-desktop is-multiline is-mobile">
+      {% for post in page_obj %}
+      <div class="column is-one-third-tablet is-full-mobile mb-5">
+        {% include "blog/_post_card.html" %}
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="columns">
+      <div class="column has-text-centered">
+        {% include "blog/_pagination.html" %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

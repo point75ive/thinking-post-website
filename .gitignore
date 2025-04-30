@@ -1,0 +1,47 @@
+# Django
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+db.sqlite3
+media/
+staticfiles/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Environment
+.env
+.venv/
+venv/
+env/
+ENV/
+
+# Node
+node_modules/
+
+# Database migrations (optional - some teams track these)
+*/migrations/
+*/migrations/*.py
+*/migrations/__init__.py
+
+# Coverage reports
+.coverage
+htmlcov/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# PyCharm
+.idea/
+*.iml
+
+# Virtual environment
+venv/

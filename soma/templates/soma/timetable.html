@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}Timetable{% endblock %}
+
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    <h1 class="title has-text-centered">My Timetable</h1>
+
+
+    {% if messages %}
+    <div class="messages">
+      {% for message in messages %}
+      <div class="notification is-{{ message.tags }}">
+        {{ message }}
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+
+    {% if timetables %}
+    <div class="table-container">
+      <table class="table is-fullwidth">
+        <thead>
+          <tr>
+            <th>Course</th>
+            <th>Day</th>
+            <th>Time</th>
+            <th>Location</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for entry in timetables %}
+          <tr>
+            <td>{{ entry.course.name }}</td>
+            <td>{{ entry.get_day_display }}</td>
+            <td>{{ entry.time }}</td>
+            <td>{{ entry.location }}</td>
+            <td>
+              {% if entry.session_link %}
+              <a href="{{ entry.session_link }}" target="_blank" class="button is-link">Join Now</a>
+              {% else %}
+              N/A
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <div class="notification is-info has-text-centered">
+      <p>Timetable details will be available soon.</p>
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

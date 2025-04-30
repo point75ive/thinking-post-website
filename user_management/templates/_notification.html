@@ -1,0 +1,16 @@
+{% for message in messages %}
+  <div class="notification is-{{ message.tags }}">
+    <button class="delete"></button>
+    {{ message }}
+  </div>
+{% endfor %}
+
+  <script defer>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.notification .delete').forEach(button => {
+        button.addEventListener('click', () => {
+          button.parentElement.remove();
+        });
+      });
+    });
+    </script>

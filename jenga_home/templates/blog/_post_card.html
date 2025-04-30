@@ -1,0 +1,31 @@
+<div class="card">
+  <div class="card-image">
+    <figure class="image is-4by3">
+      {% if post.featured_image %}
+      <img src="{{ post.featured_image.url }}" alt="{{ post.title }}">
+      {% else %}
+      <img src="https://via.placeholder.com/400x300" alt="Placeholder">
+      {% endif %}
+    </figure>
+  </div>
+  <div class="card-content">
+    <div class="media">
+      <div class="media-content">
+        <p class="title is-4 has-text-primary">{{ post.title }}</p>
+        <p class="subtitle is-6 has-text-white">
+          <a href="{% url 'jenga_home:author_posts' post.author.username %}">@{{ post.author.username }}</a>
+        </p>
+      </div>
+    </div>
+
+    <div class="box">
+      {{ post.excerpt|truncatechars:100 }}
+      <br>
+      <small>{{ post.publish_date|date:"M d, Y" }}</small>
+    </div>
+  </div>
+  <div class="card-footer">
+    <a href="{{ post.get_absolute_url }}" class="card-footer-item">Read</a>
+    
+  </div>
+</div>

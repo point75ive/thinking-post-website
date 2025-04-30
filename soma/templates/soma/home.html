@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}Dashboard{% endblock %}
+
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    <h1 class="title has-text-centered">My Dashboard</h1>
+
+
+    {% if error_message %}
+    <div class="notification is-danger">
+      {{ error_message }}
+    </div>
+    {% endif %}
+
+
+    {% if courses %}
+    <div class="columns is-multiline">
+      {% for entry in courses %}
+      <div class="column is-4">
+        <div class="card">
+          <div class="card-content">
+            <p class="title mb-4">{{ entry.course.name }}</p>
+            <p class="subtitle">{{ entry.course.description }}</p>
+            <p><strong>Instructor:</strong> {{ entry.course.instructor }}</p>
+            <p><strong>Start Date:</strong> {{ entry.course.start_date|date:"Y-m-d" }}</p>
+            <p><strong>End Date:</strong> {{ entry.course.end_date|date:"Y-m-d" }}</p>
+            <p><strong>Status:</strong> {{ entry.enrollment_status }}</p>
+            {% if entry.awaiting_verification %}
+            <div class="content is-info">
+              <p>Your fee is awaiting verification. Please wait for confirmation.</p>
+              {% if entry.remaining_balance > 0 %}
+              <p><strong>Remaining Balance:</strong> {{ entry.remaining_balance }}</p>
+              {% endif %}
+            </div>
+            {% elif entry.unpaid_fee and not entry.payment_verified %}
+            <div class="content is-info">
+              <p>You have unpaid invoices for this course. Please verify payment.</p>
+              {% if entry.remaining_balance > 0 %}
+              <p><strong>Remaining Balance:</strong> {{ entry.remaining_balance }}</p>
+              {% endif %}
+              <a class="button is-warning" href="{% url 'soma:invoice' enrollment_id=entry.enrollment_id %}">Verify
+                Payments</a>
+            </div>
+            {% elif entry.remaining_balance > 0 %}
+            <div class="content is-warning">
+              <p><strong>Remaining Balance:</strong> {{ entry.remaining_balance }}</p>
+              <a class="button is-warning" href="{% url 'soma:invoice' enrollment_id=entry.enrollment_id %}">Make
+                Payment</a>
+            </div>
+            {% endif %}
+          </div>
+          <footer class="card-footer">
+            <a href="{% url 'soma:timetable' %}" class="card-footer-item">View Timetable</a>
+          </footer>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="container is-info has-text-centered">
+      <p>You are not enrolled in any courses yet.</p>
+      <a href="{% url 'soma:enrol' %}" class="button is-link mt-4">Enroll in a Course</a>
+    </div>
+    {% endif %}
+
+
+    {% if pending_payments %}
+    <div class="section">
+      <h2 class="title is-4">Pending Payments</h2>
+      <table class="table is-fullwidth">
+        <thead>
+          <tr>
+            <th>Course</th>
+            <th>Amount Due</th>
+            <th>Payment Status</th>
+            <th>Due Date</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for payment in pending_payments %}
+          <tr>
+            <td>{{ payment.course.name }}</td>
+            <td>Ksh {{ payment.amount|floatformat:2 }}</td>
+            <td>
+              {% if payment.is_partial %}
+              Partially Paid (Ksh {{ payment.paid_amount|floatformat:2 }} of Ksh {{
+              payment.original_amount|floatformat:2 }})
+              {% else %}
+              Unpaid
+              {% endif %}
+            </td>
+            <td>{{ payment.due_date }}</td>
+            <td>
+              <a href="{% url 'soma:invoice' enrollment_id=payment.enrollment_id %}" class="button is-small is-primary">
+                Pay Now
+              </a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    {% if courses %}
+    <div class="section">
+      <p class="has-text-centered">No pending payments.</p>
+    </div>
+    {% endif %}
+    {% endif %}
+
+
+    {% if courses %}
+    <div class="section has-text-centered">
+      <a href="{% url 'soma:enrol' %}" class="button is-link">Enroll in Another Course</a>
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

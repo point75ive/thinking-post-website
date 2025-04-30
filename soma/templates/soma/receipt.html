@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}Receipt{% endblock %}
+
+
+{% block content %}
+<div class="container">
+  <div class="box">
+    <div class="columns">
+      <div class="column is-half">
+        <img loading="lazy" src="{% static 'images/logo.png' %}" alt="Logo" style="max-width: 150px;">
+      </div>
+      <div class="column is-half has-text-right">
+        <h1 class="title">Payment Receipt</h1>
+      </div>
+    </div>
+
+
+    {% if messages %}
+    <div class="messages">
+      {% for message in messages %}
+      <div class="notification is-{{ message.tags }}">
+        {{ message }}
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+
+    <div class="columns">
+      <div class="column is-full">
+        <table class="table is-fullwidth">
+          <thead>
+            <tr>
+              <th colspan="2" class="has-text-centered">Payment Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>User:</th>
+              <td>{{ user.username }}</td>
+            </tr>
+            <tr>
+              <th>Course:</th>
+              <td>{{ course.name }}</td>
+            </tr>
+
+
+            <tr>
+              <th>Amount:</th>
+              <td>{{ payment.amount }}</td>
+            </tr>
+            <tr>
+              <th>Phone Number:</th>
+              <td>{{ payment.phone_no }}</td>
+            </tr>
+            <tr>
+              <th>Payment Date:</th>
+              <td>{{ payment.created_at|date:"Y-m-d" }}</td>
+            </tr>
+          </tbody>
+        </table>
+
+
+        <div class="content has-text-centered">
+          <h2 class="title is-5">Thank you for your payment!</h2>
+          <p>If you have any questions, please contact our support team.</p>
+        </div>
+
+
+        <div class="buttons is-centered">
+          <a href="{% url 'soma:fees' %}" class="button is-link">Back to Fees</a>
+        </div>
+      </div>
+    </div>
+
+
+    <footer class="footer">
+      <div class="content has-text-centered is-small">
+        <p><span size="2">Payments are non-refundable and are subject to our terms and conditions.</span></p>
+      </div>
+    </footer>
+  </div>
+</div>
+{% endblock %}

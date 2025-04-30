@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}My Recordings{% endblock %}
+
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    <h1 class="title has-text-centered">My Recordings</h1>
+    <p class="has-text-centered">Please access the videos using the same Gmail account you used for enrollment.</p>
+
+
+    {% if messages %}
+    <div class="messages">
+      {% for message in messages %}
+      <div class="notification is-{{ message.tags }}">
+        {{ message }}
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+
+    {% if recordings %}
+    <div class="table-container">
+      <table class="table is-fullwidth">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for recording in recordings %}
+          <tr>
+            <td>{{ recording.name }}</td>
+            <td>{{ recording.description }}</td>
+            <td>
+              <a href="{{ recording.recording_link }}" target="_blank" class="button is-link">Watch Now</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <div class="notification is-info has-text-centered">
+      <p>No recordings available.</p>
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

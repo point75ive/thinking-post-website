@@ -1,0 +1,19 @@
+<nav class="pagination is-centered" role="navigation" aria-label="pagination">
+    {% if page_obj.has_previous %}
+      <a href="?page={{ page_obj.previous_page_number }}" class="pagination-previous">Previous</a>
+    {% endif %}
+    
+    {% if page_obj.has_next %}
+      <a href="?page={{ page_obj.next_page_number }}" class="pagination-next">Next</a>
+    {% endif %}
+  
+    <ul class="pagination-list">
+      {% for num in page_obj.paginator.page_range %}
+        <li>
+          <a href="?page={{ num }}" 
+             class="pagination-link {% if num == page_obj.number %}is-current{% endif %}"
+             aria-label="Goto page {{ num }}">{{ num }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+  </nav>

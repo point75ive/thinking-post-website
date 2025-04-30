@@ -1,0 +1,77 @@
+{% load static %}
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="{% url 'soma:student_home' %}">
+      <figure class="image">
+        <img loading="lazy" src="{% static 'images/thinking_shule.jpg' %}" alt="Logo" />
+      </figure>
+    </a>
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarMenu">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div id="navbarMenu" class="navbar-menu">
+    <div class="navbar-start">
+      <div class="navbar-item">
+        <a class="navbar-link is-arrowless" href="{% url 'soma:student_home' %}">Home</a>
+      </div>
+      <div class="navbar-item">
+        <a class="navbar-link is-arrowless" href="{% url 'soma:timetable' %}">Timetable</a>
+      </div>
+      <div class="navbar-item">
+        <a class="navbar-link is-arrowless" href="{% url 'soma:fees' %}">Fees</a>
+      </div>
+      <div class="navbar-item">
+        <a class="navbar-link is-arrowless" href="{% url 'soma:materials' %}">Learning Materials</a>
+      </div>
+      <div class="navbar-item">
+        <a class="navbar-link is-arrowless" href="{% url 'soma:recordings' %}">Recordings</a>
+      </div>
+      <div class="navbar-item">
+        <a class="navbar-link is-arrowless" href="{% url 'jenga_home:index' %}">Blog</a>
+      </div>
+    </div>
+    <div class="navbar-end">
+      <div class="navbar-item">
+        <div class="buttons center">
+          <ul>
+            {% if user.is_authenticated %}
+              
+              {% include "registration/_logout.html" %}
+            {% else %}
+              <button><a class="buttonis-primary has-text-white" href="{% url 'user_management:sign_up' %}">Register</a></button>
+              <button><a class="button is-link" href="{% url 'user_management:login' %}">Log In</a></button>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+
+    // Get all "navbar-burger" elements
+    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+    // Add a click event on each of them
+    $navbarBurgers.forEach(el => {
+      el.addEventListener('click', () => {
+
+        // Get the target from the "data-target" attribute
+        const target = el.dataset.target;
+        const $target = document.getElementById(target);
+
+        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+        el.classList.toggle('is-active');
+        $target.classList.toggle('is-active');
+
+      });
+    });
+
+  });
+</script>

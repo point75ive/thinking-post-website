@@ -1,0 +1,71 @@
+<section id="contact" class="section">
+    <div class="container">
+      <h2 class="title is-2">Contact us for a demo</h2>
+      <p class="subtitle is-4">
+        Would you like to know more about how AABO works? Or schedule a personal consultation to evaluate your current reporting process? 
+        Submit your inquiry below.
+      </p>
+  
+      <div class="columns">
+        <div class="column is-6">
+          <form method="post" action=>
+            {% csrf_token %}
+            <div class="field">
+              <label class="label">Name</label>
+              <div class="control">
+                <input class="input" type="text" name="name" placeholder="Your Name" required>
+              </div>
+            </div>
+            
+            <div class="field">
+              <label class="label">Email</label>
+              <div class="control">
+                <input class="input" type="email" name="email" placeholder="Your Email" required>
+              </div>
+            </div>
+            
+            <div class="field">
+              <label class="label">Company</label>
+              <div class="control">
+                <input class="input" type="text" name="company" placeholder="Your Company">
+              </div>
+            </div>
+            
+            <div class="field">
+              <label class="label">Message</label>
+              <div class="control">
+                <textarea class="textarea" name="message" placeholder="Your specific needs"></textarea>
+              </div>
+            </div>
+            
+            <div class="field">
+              <label class="label">I'm interested in:</label>
+              <div class="control">
+                <label class="checkbox">
+                  <input type="checkbox" name="interest" value="Enterprise Suite">
+                  Enterprise Suite
+                </label>
+                <label class="checkbox">
+                  <input type="checkbox" name="interest" value="Search">
+                  Search
+                </label>
+              </div>
+            </div>
+            
+            <div class="field">
+              <div class="control">
+                <button type="submit" class="button is-primary is-medium">Submit Request</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        
+        <div class="column is-5 is-offset-1">
+          <div class="content">
+            <h4 class="title is-4">A relevant picture</h4>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

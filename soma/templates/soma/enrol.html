@@ -1,0 +1,194 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Enroll{% endblock %}
+
+{% block content %}
+<article class="message is-info">
+  <div class="message-header">
+    <p>Mpesa Payment Information</p>
+  </div>
+  <div class="message-body">
+    <ul>
+      <li><strong>Till number:</strong> 3044132</li>
+      <li><strong>Name:</strong> Valentine Evans Giture Karani</li>
+      <li><strong>Contact:</strong> 0724502565</li>
+      <li><strong>Email:</strong> giture@mail.com</li>
+      <li>If you encounter any challenges, please reach out.</li>
+    </ul>
+  </div>
+</article>
+
+<section class="section">
+  <div class="container">
+    <h1 class="title has-text-centered">Enroll in a Course</h1>
+
+    <div class="box">
+      <form method="post" hx-encoding="multipart/form-data">
+        {% csrf_token %}
+
+        {% if form.errors %}
+        <div class="notification is-danger">
+          <button class="delete"></button>
+          {% for field in form %}
+          {% for error in field.errors %}
+          <p><strong>{{ field.label }}</strong>: {{ error }}</p>
+          {% endfor %}
+          {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- Course Selection -->
+        <div class="field">
+          <label class="label" for="{{ form.course.id_for_label }}">{{ form.course.label }}</label>
+          <div class="control">
+            <div class="select is-fullwidth">
+              {{ form.course }}
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Course Fee</label>
+          <div class="control">
+            <input class="input" type="text" id="course-fee-display" value="Select a course" readonly>
+          </div>
+        </div>
+
+
+        <!-- Session Selection -->
+        <div class="field">
+          <label class="label" for="{{ form.session.id_for_label }}">{{ form.session.label }}</label>
+          <div class="control">
+            <div class="select is-fullwidth">
+              {{ form.session }}
+            </div>
+          </div>
+        </div>
+
+        <!-- Phone Number -->
+        <div class="field">
+          <label class="label" for="{{ form.phone_no.id_for_label }}">{{ form.phone_no.label }}</label>
+          <div class="control">
+            {{ form.phone_no }}
+          </div>
+          {% if form.phone_no.help_text %}
+          <p class="help">{{ form.phone_no.help_text }}</p>
+          {% endif %}
+        </div>
+
+        <!-- Payment Option -->
+        <div class="field">
+          <label class="label">{{ form.payment_option.label }}</label>
+          <div class="control">
+            {% for radio in form.payment_option %}
+            <label class="radio">
+              {{ radio.tag }}
+              {{ radio.choice_label }}
+            </label>
+            {% endfor %}
+          </div>
+          <p class="help">Paying in installments attracts a surcharge of Ksh 1000.</p>
+        </div>
+
+        <div class="field" id="partial-payment-amount-field" style="display: none;">
+          <label class="label">Partial Payment Amount</label>
+          <div class="control">
+            <input type="number" name="partial_payment_amount" id="id_partial_payment_amount" class="input"
+              placeholder="Enter amount" step="0.01" min="0">
+          </div>
+          <p class="help">
+            Minimum payment: <span id="min-payment-amount">Ksh 0.00</span>
+            (50% of course fee)
+          </p>
+        </div>
+
+        <!-- Comments -->
+        <div class="field">
+          <label class="label" for="{{ form.comments.id_for_label }}">{{ form.comments.label }}</label>
+          <div class="control">
+            {{ form.comments }}
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div class="field">
+          <div class="control">
+            <button class="button is-primary is-fullwidth" type="submit">Submit Enrollment</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- HTMX for dynamic session loading -->
+<script src="https://unpkg.com/htmx.org@1.9.0"></script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const courseSelect = document.getElementById('id_course');
+    const feeDisplay = document.getElementById('course-fee-display');
+    const minPaymentDisplay = document.getElementById('min-payment-amount');
+
+    if (courseSelect) {
+      courseSelect.addEventListener('change', function () {
+        const courseId = this.value;
+        if (!courseId) {
+          feeDisplay.value = 'Select a course';
+          return;
+        }
+
+        fetch(`/get_course_fee/?course_id=${courseId}`)
+          .then(response => response.json())
+          .then(data => {
+            if (data.success) {
+              // Update fee display
+              feeDisplay.value = data.formatted_fee;
+
+              // Update partial payment info
+              const partialPaymentInput = document.getElementById('id_partial_payment_amount');
+              if (partialPaymentInput) {
+                partialPaymentInput.min = data.half_fee;
+                partialPaymentInput.placeholder = `Minimum ${data.formatted_min}`;
+              }
+
+              if (minPaymentDisplay) {
+                minPaymentDisplay.textContent = data.formatted_min;
+              }
+            } else {
+              console.error('Error:', data.error);
+              feeDisplay.value = 'Error loading fee';
+            }
+          })
+          .catch(error => {
+            console.error('Fetch error:', error);
+            feeDisplay.value = 'Error loading fee';
+          });
+      });
+
+      // Initialize with current value if any
+      if (courseSelect.value) {
+        courseSelect.dispatchEvent(new Event('change'));
+      }
+    }
+
+    // Payment option toggle
+    const paymentOptions = document.querySelectorAll('input[name="payment_option"]');
+    const partialPaymentField = document.getElementById('partial-payment-amount-field');
+
+    if (paymentOptions && partialPaymentField) {
+      paymentOptions.forEach(option => {
+        option.addEventListener('change', function () {
+          partialPaymentField.style.display = this.value === 'half' ? 'block' : 'none';
+        });
+
+        // Initialize if one is already selected
+        if (option.checked) {
+          option.dispatchEvent(new Event('change'));
+        }
+      });
+    }
+  });
+</script>
+{% endblock %}

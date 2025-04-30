@@ -1,0 +1,340 @@
+{% extends "base.html" %}
+{% block title %}Home | Thinking Post{% endblock %}
+
+{% block content %}
+
+{% include "_base_navbar.html" %}
+
+<!-- Section 1: Hero (Full-width) -->
+<section class="hero is-primary is-medium">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <h1 class="title is-1 has-text-weight-bold mb-6">
+        Everything your business needs for efficient and transparent management
+      </h1>
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <p class="subtitle is-4">
+            Thinking Post is your comprehensive partner in brand experience,
+            working closely with your team to get the word out and drive customers in.
+          </p>
+          <button class="button is-light is-large mt-4" hx-get="/contact" hx-target="#content">
+            <strong>Get Started</strong>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Section 2: Services (3-column grid) -->
+<section class="section py-6">
+  <div class="container">
+    <h2 class="title is-2 section-title mb-6">Our Strategic Roles</h2>
+    <div class="columns">
+      <!-- Advisory Partner -->
+      <div class="column">
+        <div class="card">
+          <div class="card-content">
+            <div class="icon is-large has-text-primary mb-4">
+              <i class="fas fa-handshake fa-3x"></i>
+            </div>
+            <h3 class="title is-4">Software Partner</h3>
+            <p class="subtitle is-6">
+              We implement custom operational software for your business 
+              ensuring visibility and seamless process management.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Strategic Partner -->
+      <div class="column">
+        <div class="card">
+          <div class="card-content">
+            <div class="icon is-large has-text-primary mb-4">
+              <i class="fas fa-chess-knight fa-3x"></i>
+            </div>
+            <h3 class="title is-4">Marketing Partner</h3>
+            <p class="subtitle is-6">
+              Acting as your internal story teller, we capture your audience
+              through the stories you want to tell, voicing the feeling and driving action.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Digital Reporting -->
+      <div class="column">
+        <div class="card">
+          <div class="card-content">
+            <div class="icon is-large has-text-primary mb-4">
+              <i class="fas fa-chart-line fa-3x"></i>
+            </div>
+            <h3 class="title is-4">Learning Partner</h3>
+            <p class="subtitle is-6">
+              Our business driven learning solutions offer an opprotunity to skill-up and 
+              provide newer insights into the problems we already face.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Section 3: Latest News (2-column layout) -->
+<section class="section py-6 has-background-light">
+  <div class="container">
+    <h2 class="title is-2 section-title mb-6">Latest Insights</h2>
+    <div class="columns">
+      <!-- News 1 -->
+      <div class="column">
+        <div class="card">
+          <div class="card-content">
+            <h3 class="title is-4">New reporting requirements for 2024</h3>
+            <p class="subtitle is-6 has-text-grey">
+              How updated regulations impact your group's financial strategy and
+              compliance workflows.
+            </p>
+            <a class="button is-primary is-outlined mt-4" hx-get="/news/reporting-2024" hx-target="#content">
+              Read More
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- News 2 -->
+      <div class="column">
+        <div class="card">
+          <div class="card-content">
+            <h3 class="title is-4">Digital transformation in finance</h3>
+            <p class="subtitle is-6 has-text-grey">
+              Why adopting digital financial reporting is no longer optional for
+              modern enterprises seeking transparency.
+            </p>
+            <a class="button is-primary is-outlined mt-4" hx-get="/news/digital-finance" hx-target="#content">
+              Read More
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section py-6" style="background-color: #f8f9fa;">
+  <div class="container">
+    <!-- Top Content -->
+    <div class="columns is-vcentered mb-6">
+      <div class="column is-7 animate__animated" hx-trigger="intersect once" hx-swap="class add:animate__fadeInLeft">
+        <h1 class="title is-2 mb-4">Thinking Post consolidates in real time with full availability</h1>
+        <p class="subtitle is-5">
+          Thinking Post consolidates all stakeholders and offices daily, with performance reports updated in real-time.
+          Our consolidated financial statements reflect changes to operational plans immediately.
+        </p>
+      </div>
+      <div class="column is-5 animate__animated" hx-trigger="intersect once" hx-swap="class add:animate__fadeInRight">
+        <figure class="image is-16by9">
+          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71" alt="Data consolidation dashboard">
+        </figure>
+      </div>
+    </div>
+
+    <!-- Stats Counter -->
+    <div class="columns is-centered has-text-centered my-6">
+      <div class="column is-3 stat-card" id="stat1">
+        <div class="box has-background-white">
+          <p class="title is-1 has-text-primary counter" data-target="10000">0</p>
+          <p class="subtitle is-5">Admin Users</p>
+        </div>
+      </div>
+      <div class="column is-3 stat-card" id="stat2">
+        <div class="box has-background-white">
+          <p class="title is-1 has-text-primary counter" data-target="140">0</p>
+          <p class="subtitle is-5">Active Monitors</p>
+        </div>
+      </div>
+      <div class="column is-3 stat-card" id="stat3">
+        <div class="box has-background-white">
+          <p class="title is-1 has-text-primary counter" data-target="400">0</p>
+          <p class="subtitle is-5">Business Owners</p>
+        </div>
+      </div>
+      <div class="column is-3 stat-card" id="stat4">
+        <div class="box has-background-white">
+          <p class="title is-1 has-text-primary counter" data-target="35">0</p>
+          <p class="subtitle is-5">Tax Jurisdictions</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Content -->
+    <div class="columns is-vcentered mt-6">
+      <div class="column is-6 animate__animated" hx-trigger="intersect once" hx-swap="class add:animate__fadeInUp">
+        <div class="highlight-box">
+          <h2 class="title is-4">Supported by leading agencies</h2>
+          <p class="subtitle is-5">
+            Our solutions are trusted and implemented by government agencies and financial institutions worldwide.
+          </p>
+        </div>
+      </div>
+      <div class="column is-6">
+        <h2 class="title is-3 mb-4">Streamlined group reporting, analysis and follow-up</h2>
+        <p class="mb-5">
+          We identify, streamline and support groups across India and Africa municipalities,
+          operating in more than 60 countries, solving challenges in group reporting.
+        </p>
+        <div class="content">
+          <h3 class="title is-5">Through group reporting we deliver:</h3>
+          <ul class="checklist">
+            <li class="checklist-item">Accurate accounting</li>
+            <li class="checklist-item">Legal compliance reporting</li>
+            <li class="checklist-item">Executive management reports</li>
+            <li class="checklist-item">Financial statements</li>
+            <li class="checklist-item">Regulatory compliance</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h1 class="title">Some of our customers</h1>
+    <div class="columns">
+      <!-- Testimonial 1 -->
+      <div class="column">
+        <div class="card">
+          <div class="card-content">
+            <figure class="image is-48x48">
+              <img src="path/to/cabonline-logo.png" alt="Cabonline logo">
+            </figure>
+            <p class="title is-4">CABONLINE</p>
+            <p class="subtitle is-6">"AARO® helps us manage our expanding business and acquisitions internationally!"
+            </p>
+            <button class="button is-link" hx-get="/cabonline-details" hx-target="#details">Read case</button>
+          </div>
+        </div>
+      </div>
+      <!-- Testimonial 2 -->
+      <div class="column">
+        <div class="card">
+          <div class="card-content">
+            <figure class="image is-48x48">
+              <img src="path/to/dna-logo.png" alt="DNA logo">
+            </figure>
+            <p class="title is-4">DNA</p>
+            <p class="subtitle is-6">"AARO® now provides automatic reporting for our financial statements."</p>
+            <button class="button is-link" hx-get="/dna-details" hx-target="#details">Read case</button>
+          </div>
+        </div>
+      </div>
+      <!-- Testimonial 3 -->
+      <div class="column">
+        <div class="card">
+          <div class="card-content">
+            <figure class="image is-48x48">
+              <img src="path/to/speed-group-logo.png" alt="Speed Group logo">
+            </figure>
+            <p class="title is-4">SPEED GROUP</p>
+            <p class="subtitle is-6">"AARO® has revolutionized our financial reporting with faster results and fewer
+              errors."</p>
+            <button class="button is-link" hx-get="/speed-group-details" hx-target="#details">Read case</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="title">Why Customers Love AARO</h2>
+    <ul>
+      <li>AARO® is fast and user-friendly.</li>
+      <li>Supports smooth analysis and detailed exports.</li>
+      <li>Effortless cash flow management.</li>
+      <li>Automatic eliminations made easy.</li>
+      <li>Convenient ad-hoc analysis with report generator.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="title">Request a Demo</h2>
+    <form hx-post="/request-demo" class="box">
+      <div class="field">
+        <label class="label">Name</label>
+        <div class="control">
+          <input class="input" type="text" name="name" placeholder="Your Name">
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Email</label>
+        <div class="control">
+          <input class="input" type="email" name="email" placeholder="Your Email">
+        </div>
+      </div>
+      <div class="field">
+        <label class="label">Message</label>
+        <div class="control">
+          <textarea class="textarea" name="message" placeholder="Your Message"></textarea>
+        </div>
+      </div>
+      <div class="control">
+        <button class="button is-primary">Submit</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+{% include "_base_footer.html" %}
+
+<!-- Intersection Observer for animations -->
+<script>
+  // Counter animation
+  function animateCounters() {
+    const counters = document.querySelectorAll('.counter');
+    const speed = 200;
+
+    counters.forEach(counter => {
+      const target = +counter.getAttribute('data-target');
+      const count = +counter.innerText;
+      const increment = target / speed;
+
+      if (count < target) {
+        counter.innerText = Math.ceil(count + increment);
+        setTimeout(animateCounters, 1);
+      } else {
+        counter.innerText = target;
+      }
+    });
+  }
+
+  // Intersection Observer for scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // Animate stat cards
+        if (entry.target.classList.contains('stat-card')) {
+          entry.target.classList.add('visible');
+          if (entry.target.id === 'stat1') animateCounters();
+        }
+
+        // HTMX will handle other animations via class additions
+      }
+    });
+  }, { threshold: 0.1 });
+
+  // Observe elements
+  document.querySelectorAll('.stat-card, [hx-trigger="intersect"]').forEach(el => {
+    observer.observe(el);
+  });
+</script>
+
+
+
+{% endblock %}

@@ -1,0 +1,325 @@
+/* 1. Base Styles */
+html {
+    background-color: #5f45bb;
+    background-image: linear-gradient(to bottom right, #ff5714, #034c3c);
+    color: #fff;
+    font-family: "Quicksand", sans-serif;
+    font-size: 16px;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.5;
+    min-height: 100vh;
+    min-width: 300px;
+    overflow-x: hidden;
+    text-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+}
+
+a {
+    color: currentColor;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+/* 2. Shared Components */
+.wallpaper,
+.picture-shadow,
+.picture-image {
+    display: block;
+    height: 100%;
+    left: 0;
+    top: 0;
+    width: 100%;
+}
+
+.wallpaper {
+    background-image: url("../images/cube-background.jpg");
+    background-position: center;
+    background-size: cover;
+    opacity: 0.2;
+    position: fixed;
+}
+
+.content {
+    display: flex;
+    position: relative;
+    min-height: 100vh;
+}
+
+.side {
+    max-height: 20rem;
+    max-width: 20rem;
+}
+
+.about {
+    max-width: 26rem;
+}
+
+.picture {
+    padding-top: 100%;
+    position: relative;
+    width: 100%;
+}
+
+.picture-shadow {
+    border-radius: 29048px;
+    background-image: radial-gradient(#000 0%, rgba(0, 0, 0, 0) 70%);
+    position: absolute;
+    top: 10%;
+}
+
+.picture-image {
+    border-radius: 290486px;
+    position: absolute;
+}
+
+/* 3. Typography & Text Elements */
+.name {
+    font-size: 2.25rem;
+    line-height: 1.125;
+    margin-bottom: 0.5rem;
+}
+
+.job {
+    color: #ffe479;
+    font-size: 0.75rem;
+    font-family: "Montserrat", "Quicksand", sans-serif;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+}
+
+.hr {
+    background-color: #ff470f;
+    border: none;
+    content: "";
+    height: 1px;
+    margin-bottom: 1.5rem;
+    margin-top: 1.5rem;
+    transform-origin: center left;
+    width: 4rem;
+}
+
+.description {
+    font-size: 1.5rem;
+}
+
+/* 4. Interactive Elements */
+.button,
+.social a {
+    transform-origin: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.button {
+    border-radius: 290486px;
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+    color: #9013fe;
+    display: inline-block;
+    font-family: "Montserrat", "Quicksand", sans-serif;
+    font-size: 0.875rem;
+    letter-spacing: 0.3em;
+    line-height: 1;
+    padding: 1.5em 2.5em;
+    text-shadow: none;
+    text-transform: uppercase;
+    user-select: none;
+    vertical-align: top;
+    white-space: nowrap;
+    will-change: box-shadow, transform;
+    border: none;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button.is-primary {
+    background-color: #4361ee;
+    background-image: linear-gradient(to right, #4361ee, #3a0ca3);
+    color: white;
+}
+
+.button.is-light {
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.button:hover {
+    box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.2);
+    transform: scale(1.02) translateY(-4px);
+}
+
+.button:active {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.3);
+    transform: scale(0.98) translateY(-2px);
+}
+
+/* Ripple effect */
+.button::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 100%;
+    transform: scale(1, 1) translate(-50%);
+    transform-origin: 50% 50%;
+}
+
+.button:focus:not(:active)::after {
+    animation: ripple 0.6s ease-out;
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0, 0);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(20, 20);
+        opacity: 0;
+    }
+}
+
+/* 5. Card Components */
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.card-content {
+    padding: 2rem;
+}
+
+/* 6. Social Icons */
+.social {
+    display: flex;
+    margin-top: 1.5rem;
+}
+
+.social li {
+    height: 2rem;
+    margin-right: 0.5rem;
+    text-align: center;
+    width: 2rem;
+}
+
+.social a {
+    align-items: center;
+    display: flex;
+    font-size: 1.5rem;
+    height: 2rem;
+    justify-content: center;
+    opacity: 0.7;
+    transition-property: opacity, transform;
+    width: 2rem;
+    will-change: opacity, transform;
+}
+
+.social a:hover {
+    opacity: 1;
+    transform: scale(1.25);
+}
+
+.social a:active {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+/* 7. Navigation */
+.navbar {
+    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-item {
+    transition: all 0.3s ease;
+}
+
+.navbar-item:hover {
+    background-color: rgba(0, 0, 0, 0.05) !important;
+}
+
+/* 8. Responsive Adjustments */
+@media screen and (max-width: 799px) {
+    .content {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 5rem 3rem;
+    }
+
+    .side {
+        margin-bottom: 3rem;
+        width: 100%;
+    }
+
+    .button {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+    
+    .card {
+        margin-bottom: 1.5rem;
+    }
+}
+
+@media screen and (min-width: 800px) {
+    .content {
+        align-items: center;
+        justify-content: space-evenly;
+        padding: 4rem;
+    }
+
+    .side {
+        flex-grow: 0;
+        flex-shrink: 0;
+        height: 20rem;
+        margin-left: 4rem;
+        order: 2;
+        width: 20rem;
+    }
+
+    .about {
+        flex-grow: 1;
+        flex-shrink: 1;
+    }
+}
+
+/* 9. Hero Section */
+.hero {
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 0;
+}
+
+.hero-body {
+    position: relative;
+    z-index: 1;
+}
+
+.hero .title {
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}

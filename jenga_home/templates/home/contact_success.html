@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section class="section">
+    <div class="container">
+        <div class="columns is-centered">
+            <div class="column is-6">
+                <div class="box has-text-centered">
+                    <span class="icon is-large has-text-success mb-4">
+                        <i class="fas fa-check-circle fa-3x"></i>
+                    </span>
+                    <h1 class="title is-2">Thank You!</h1>
+                    <p class="subtitle is-4">
+                        We've received your message and will get back to you within 24-48 hours.
+                    </p>
+                    <a href="{% url 'home' %}" class="button is-primary mt-4">
+                        Return to Homepage
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

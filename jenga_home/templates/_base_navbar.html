@@ -1,0 +1,119 @@
+{% load static%}
+<nav class="navbar is-transparent has-shadow" role="navigation" aria-label="main navigation">
+  <div class="container">
+    <div class="navbar-brand">
+
+      <a class="navbar-item " href="/">
+
+        <figure class="image container">
+          <img loading="lazy" src="{% static 'images/thinking_shule.jpg' %}" alt="Logo" />
+        </figure>
+      </a>
+
+      <a class="navbar-item" href="/">
+        <strong>Thinking Post Training</strong>
+      </a>
+
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasic">
+        
+        
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+
+    <div id="navbarBasic" class="navbar-menu">
+      <div class="navbar-start">
+        <!-- Home -->
+        <a class="navbar-item" href="/">
+          Home
+        </a>
+
+        <!-- Programs Dropdown -->
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            Programs
+          </a>
+
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="{% url 'jenga_home:bda' %}">
+              Business Data Analytics
+            </a>
+            <a class="navbar-item" href="#">
+              ACCA
+            </a>
+          </div>
+        </div>
+
+
+
+        <!-- About Us Dropdown -->
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+            About Us
+          </a>
+
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="{% url 'jenga_home:about' %}">
+              About Thinking Post Training
+            </a>
+            
+          </div>
+        </div>
+
+        <!-- Contact Us -->
+        <a class="navbar-item" href="{% url 'jenga_home:contact_page' %}">
+          Contact Us
+        </a>
+
+        <!-- Blog -->
+        <a class="navbar-item" href="{% url 'jenga_home:index' %}">
+          Blog
+        </a>
+      </div>
+
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <div class="buttons">
+            <a class="button is-light" href="{% url 'user_management:sign_up' %}">
+              <strong>Enrol</strong>
+            </a>
+          </div>
+        </div>
+
+        <div class="navbar-item">
+          <div class="buttons">
+            <a class="button is-light" href="{% url 'user_management:login' %}">
+              <strong>Log In</strong>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+
+    // Get all "navbar-burger" elements
+    const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+    // Add a click event on each of them
+    $navbarBurgers.forEach(el => {
+      el.addEventListener('click', () => {
+
+        // Get the target from the "data-target" attribute
+        const target = el.dataset.target;
+        const $target = document.getElementById(target);
+
+        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+        el.classList.toggle('is-active');
+        $target.classList.toggle('is-active');
+
+      });
+    });
+
+  });
+</script>

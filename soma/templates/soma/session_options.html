@@ -1,0 +1,4 @@
+<option value="">Select a session</option>
+ {% for session in sessions %}
+  <option value="{{ session.id }}">{{ session.name }}</option>
+ {% endfor %}

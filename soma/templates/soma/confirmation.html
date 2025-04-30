@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Payment Confirmation{% endblock %}
+
+{% block content %}
+<div class="container is-flex is-align-items-center is-justify-content-center" style="height: 100vh;">
+  <div class="box has-text-centered">
+    <figure class="image is-128x128 container mb-4">
+      <img src="{% static 'images/thinkingpost.png' %}" alt="Banner Image 1" style="max-width: 512px;">
+    </figure>
+    <h2 class="title is-4">Confirmation Page</h2>
+    <div class="card" style="width: 18rem;">
+      <div class="card-content">
+        <div class="notification is-success">{{ transaction.status }}</div>
+        <h5 class="title is-5">Payment Summary</h5>
+        <p class="content">Payment Total: Ksh {{ transaction.amount }}</p>
+        <p class="content">Customer Phone: {{ transaction.phone_no }}</p>
+      </div>
+    </div>
+    <div class="buttons mt-4 is-centered">
+      <a class="button is-link" href="{% url 'soma:home' %}">Back Home</a>
+      <a class="button is-primary" href="{% url 'soma:fees' %}">View Fees</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

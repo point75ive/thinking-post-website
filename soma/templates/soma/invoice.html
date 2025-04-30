@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="section">
+  <div class="container">
+    <h1 class="title">Payment Invoice</h1>
+
+    <div class="box">
+      <div class="content">
+        <p><strong>Course:</strong> {{ course.name }}</p>
+        <p><strong>Original Amount:</strong> Ksh {{ original_amount|floatformat:2 }}</p>
+        <p><strong>Total Paid:</strong> Ksh {{ total_paid|floatformat:2 }}</p>
+        <p class="has-text-weight-bold">
+          <strong>Amount Due:</strong> Ksh {{ remaining_amount|floatformat:2 }}
+        </p>
+      </div>
+
+      <form method="post">
+        {% csrf_token %}
+
+        <div class="field">
+          <label class="label">{{ form.mpesa_ref.label }}</label>
+          <div class="control">
+            {{ form.mpesa_ref }}
+          </div>
+          {% if form.mpesa_ref.errors %}
+          <p class="help is-danger">{{ form.mpesa_ref.errors }}</p>
+          {% endif %}
+        </div>
+
+        <div class="field">
+          <label class="label">{{ form.payment_amount.label }}</label>
+          <div class="control">
+            {{ form.payment_amount }}
+          </div>
+          <p class="help">
+            Enter amount to pay (minimum Ksh 100)
+          </p>
+          {% if form.payment_amount.errors %}
+          <p class="help is-danger">{{ form.payment_amount.errors }}</p>
+          {% endif %}
+        </div>
+
+        <div class="field is-grouped">
+          <div class="control">
+            <button type="submit" class="button is-primary">
+              Submit Payment
+            </button>
+          </div>
+          <div class="control">
+            <a href="{% url 'soma:student_home' %}" class="button is-light">
+              Cancel
+            </a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const paymentInput = document.getElementById('id_payment_amount');
+    const remainingAmount = {{ remaining_amount| safe
+  }};
+
+  // Set max value to remaining amount:
+  paymentInput.max = remainingAmount;
+
+  // Validate amount when form is submitted
+  document.querySelector('form').addEventListener('submit', function (e) {
+    const amount = parseFloat(paymentInput.value);
+    if (amount > remainingAmount) {
+      alert('Payment amount cannot exceed remaining balance of Ksh ' + remainingAmount.toFixed(2));
+      e.preventDefault();
+    }
+  });
+  });
+</script>
+{% endblock %}

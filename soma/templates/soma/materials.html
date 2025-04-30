@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}Materials{% endblock %}
+
+
+{% block content %}
+<section class="section">
+  <div class="container">
+    <h1 class="title has-text-centered">My Materials</h1>
+
+
+    {% if messages %}
+    <div class="messages">
+      {% for message in messages %}
+      <div class="notification is-{{ message.tags }}">
+        {{ message }}
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+
+    {% if materials %}
+    <div class="table-container">
+      <table class="table is-fullwidth">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for material in materials %}
+          <tr>
+            <td>{{ material.name }}</td>
+            <td>{{ material.description }}</td>
+            <td>
+              <a href="{% url 'soma:access_material' material_id=material.id %}" target="_blank"
+                class="button is-link">Go To</a>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <div class="notification is-info has-text-centered">
+      <p>No materials available.</p>
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

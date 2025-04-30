@@ -1,0 +1,33 @@
+{% extends "blog/base_blog.html" %}
+
+{% block title %}Posts by {{ author.username }} | Your Site Name{% endblock %}
+
+{% block blog_content %}
+<section class="section">
+  <div class="container">
+    <div class="columns is-vcentered is-mobile mb-5">
+      <div class="column is-narrow">
+        <span class="icon is-large">
+          <i class="fas fa-user"></i>
+        </span>
+      </div>
+      <div class="column">
+        <h1 class="title is-2">Author: {{ author.username }}</h1>
+        <p class="subtitle">{{ author.get_full_name }}</p>
+      </div>
+    </div>
+
+    <div class="columns is-multiline">
+      {% for post in posts %}
+        <div class="column is-one-third-tablet">
+          {% include "blog/_post_card.html" %}
+        </div>
+      {% empty %}
+        <div class="column">
+          <p>No posts found by this author.</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

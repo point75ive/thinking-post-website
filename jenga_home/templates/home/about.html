@@ -1,0 +1,146 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About Us{% endblock %}
+
+{% block content %}
+<section class="hero is-primary is-medium is-fullheight mb-6" style="background: center top/cover url('');">
+        <div class="hero-body is-fullheight has-text-centered" >
+            <div class="container">
+                <h1 class="title is-1">
+                    About Thinking Post Training
+                </h1>
+                <p class="subtitle">
+                    Bridging accounting theory with real-world practice through tailored education.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="section content">
+        <div class="box">
+            <div class="content">
+                <p class="">Founded in 2025 by Evans Giture, Thinking Post Training was born from a passion to transform accounting education. With hands-on experience in audit, accounting, and business management, we deliver training that connects textbook concepts to practical applications.</p>
+                
+                <div class="container mt-6">
+                    <div class="columns">
+                        <div class="container  content column is-6">
+                            <p class="has-text-weight-bold">Our Mission:</p>
+                            <p>To empower professionals with skills that drive clarity and confidence in accounting and data analysis.</p>
+                        </div>
+                        <div class="container content">
+                            <p class="has-text-weight-bold">Our Edge:</p>
+                            <p>Personalized attention, real-world case studies, and flexible learning paths.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 class="title is-2">Our Courses</h2>
+                <p>We specialize in KASNEB-certified programs (like Business Data Analytics), ACCA training, and practical skill-building in Excel and data analysis. Each course is designed to:</p>
+                <ul>
+                    <li>Simplify complex accounting concepts</li>
+                    <li>Integrate data analytics tools (Excel, Power BI)</li>
+                    <li>Prepare students for real business challenges</li>
+                </ul>
+
+                <h2 class="title is-2">Why Choose Us?</h2>
+                <div class="columns">
+                    <div class="column">
+                        <div class="box">
+                            <h3 class="title is-4 has-text-primary">Practical Focus</h3>
+                            <p>Every lesson ties back to actual business scenarios, ensuring you learn skills that matter.</p>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="box">
+                            <h3 class="title is-4 has-text-primary">Flexible Learning</h3>
+                            <p>Online classes with optional in-person meetups, recorded sessions, and morning/evening slots.</p>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="box">
+                            <h3 class="title is-4 has-text-primary">Instructor Access</h3>
+                            <p>Direct support from Evans Giture, a KASNEB and ACCA-certified professional with field experience.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section has-background-light has-text-centered">
+        <div class="container">
+            <h1 class="title">Get Started</h1>
+            <p class="subtitle">Join 200+ professionals who trust us for their accounting education.</p>
+            
+            <div class="buttons is-centered">
+                <a class="button is-primary is-small is-rounded" href="{% url 'jenga_home:contact_page' %}">
+                    <span class="icon">
+                        <i class="fas fa-envelope"></i>
+                    </span>
+                    <span>Contact Us</span>
+                </a>
+            </div>
+
+            <div class="content has-text-centered mt-5">
+                <h2 class="title is-4">Currently Online-Based</h2>
+                <p>All courses are delivered virtually with plans to expand physical locations soon.</p>
+                <p class="has-text-weight-bold mt-3">Follow our journey:</p>
+                <div class="buttons is-centered">
+                    <a class="button" href="#">
+                        <span class="icon">
+                            <i class="fab fa-linkedin"></i>
+                        </span>
+                    </a>
+                    <a class="button" href="#">
+                        <span class="icon">
+                            <i class="fab fa-twitter"></i>
+                        </span>
+                    </a>
+                    <a class="button" href="#">
+                        <span class="icon">
+                            <i class="fab fa-facebook"></i>
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer has-background-primary">
+        <div class="container">
+            <div class="columns">
+                <div class="column">
+                    <h3 class="title is-4 has-text-white">Courses</h3>
+                    <ul>
+                        <li><a class="has-text-white" href="bda.html">Business Data Analytics</a></li>
+                        <li><a class="has-text-white" href="#">ACCA Training</a></li>
+                        <li><a class="has-text-white" href="#">Excel for Accountants</a></li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h3 class="title is-4 has-text-white">Resources</h3>
+                    <ul>
+                        <li><a class="has-text-white" href="#">Study Materials</a></li>
+                        <li><a class="has-text-white" href="#">Class Recordings</a></li>
+                        <li><a class="has-text-white" href="#">Practice Exams</a></li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h3 class="title is-4 has-text-white">Company</h3>
+                    <ul>
+                        <li><a class="has-text-white" href="about.html">About Us</a></li>
+                        <li><a class="has-text-white" href="#">Teaching Philosophy</a></li>
+                        <li><a class="has-text-white" href="#">Blog</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="content has-text-centered has-text-white">
+                <p>&copy; 2025 Thinking Post Training. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    {% endblock %}

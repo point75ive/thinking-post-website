@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block title %}Fees{% endblock %}
+
+
+{% block content %}
+<div class="notification-container notification is-info is-light">
+  <button class="delete" onclick="this.parentElement.remove()"></button>
+  <strong>Mpesa Payment Information:</strong>
+  <ul>
+    <li>Till number: 3044132</li>
+    <li>Name: Valentine Evans Giture Karani</li>
+    <li>In case of any challenges, contact: 0724502565</li>
+    <li>Email: giture@mail.com</li>
+  </ul>
+</div>
+
+
+{% if error_message %}
+<div class="notification is-danger">
+  {{ error_message }}
+</div>
+{% endif %}
+
+
+<div class="container mb-4">
+  <h1 class="title">Your Account Summary</h1>
+  {% if fee_details %}
+  <table class="table is-fullwidth is-striped">
+    <thead>
+      <tr>
+        <th>Description</th>
+        <th>Amount</th>
+        <th>Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for fee in fee_details %}
+      <tr>
+        <td>{{ fee.description }}</td>
+        <td>{{ fee.amount }}</td>
+        <td>{{ fee.date|date:"Y-m-d" }}</td>
+        <td>
+          {% if fee.description == "Payment" %}
+          <a class="button is-link is-small" href="{% url 'soma:receipt' payment_id=fee.id %}">View Receipt</a>
+          {% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+    <tfoot>
+      <tr>
+        <th>Fee Balance</th>
+        <th>{{ fee_balance }}</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </tfoot>
+  </table>
+  {% else %}
+  <p class="is-italic">No fee or payment information available.</p>
+  {% endif %}
+</div>
+{% endblock %}
