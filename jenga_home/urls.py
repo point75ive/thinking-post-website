@@ -1,7 +1,7 @@
 from django.urls import path, include
-from django.contrib.sitemaps.views import sitemap
+
 from django.conf import settings
-from jenga_home.sitemaps import BlogSitemap
+
 from django.conf.urls.static import static
 from .views import (
     home,
@@ -16,11 +16,9 @@ from .views import (
     contact_success,
     author_posts,
     add_comment,
+    RobotsTxtView,
 )
 
-sitemaps = {
-    "blog": BlogSitemap,
-}
 
 
 app_name = "jenga_home"
@@ -38,8 +36,8 @@ urlpatterns = [
     path('post/<int:post_id>/comment/', add_comment, name='add_comment'),
     path('post/<int:post_id>/like/', like_post, name='like_post'),
     path('tags/<slug:slug>/', tag_view, name='tag'),
-    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
     path('author/<str:username>/', author_posts, name='author_posts'),
+    path('robots.txt', RobotsTxtView.as_view(), name='robots.txt'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

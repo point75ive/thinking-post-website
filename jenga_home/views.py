@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, reverse
 from django.core.paginator import Paginator
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST, require_GET
@@ -9,10 +9,18 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from taggit.models import Tag  # Changed import for tags
 from django.core.exceptions import ValidationError
+from django.views.generic.base import TemplateView
 
 
 # Create your views here.
+class RobotsTxtView(TemplateView):
+    template_name = "robots.txt"
+    content_type = "text/plain"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["SITE_URL"] = settings.SITE_URL
+        return context
 
 def home(request):
     return render(request, "home/home.html")

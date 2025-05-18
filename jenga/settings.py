@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'jenga_home',
     'user_management',
     'taggit',
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
     'django_summernote',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -45,6 +47,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
+SITE_ID = 1 
+SITE_URL = 'https://thinking-post.com'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

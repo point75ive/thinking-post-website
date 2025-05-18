@@ -1,5 +1,6 @@
 from django.db import models
 from django.core.exceptions import ValidationError
+from django.urls import reverse
 
 
 class EnrollmentStatus(models.Model):
@@ -35,6 +36,9 @@ class Course(models.Model):
     class Meta:
         db_table = 'course'
 
+    def get_absolute_url(self):
+        return reverse('soma:enrol')
+    
     def __str__(self):
         return self.name
 
@@ -49,6 +53,10 @@ class Session(models.Model):
     class Meta:
         db_table = 'session'
         unique_together = ('name', 'course')  # Added unique constraint
+
+    def get_absolute_url(self):
+        # Point to a relevant URL - adjust if you have a specific session detail page
+        return reverse('soma:timetable')
 
     def __str__(self):
         return self.name
@@ -184,6 +192,9 @@ class LearningMaterial(models.Model):
     class Meta:
         db_table = 'learning_material'
 
+    def get_absolute_url(self):
+        return reverse('soma:access_material', args=[self.id])
+
     def __str__(self):
         return self.name
 
@@ -201,6 +212,9 @@ class Recording(models.Model):
 
     class Meta:
         db_table = 'recording'
+
+    def get_absolute_url(self):
+        return reverse('soma:access_recording', args=[self.id, "token-placeholder"])
 
     def __str__(self):
         return self.name
