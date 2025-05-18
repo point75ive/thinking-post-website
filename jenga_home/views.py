@@ -3,7 +3,7 @@ from django.core.paginator import Paginator
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST, require_GET
 from django.contrib import messages
-from .models import BlogPost, BlogCategory, Comment, RequestType, FormRequest
+from jenga_home.models import BlogPost, BlogCategory, Comment, RequestType, FormRequest
 from django.core.mail import send_mail
 from django.conf import settings
 from django.contrib.auth import get_user_model
@@ -45,21 +45,21 @@ def contact_page(request):
     # Create default request types if they don't exist
     default_request_types = [
         "Demo Request",
-        "Training Inquiry", 
+        "Training Inquiry",
         "Partnership",
         "Other"
     ]
-    
+
     for req_type in default_request_types:
         RequestType.objects.get_or_create(name=req_type)
-    
+
     if request.method == 'POST':
         try:
             # Get or create the request type
             request_type, created = RequestType.objects.get_or_create(
                 name=request.POST.get('request_type', 'Other')
             )
-            
+
             # Create the form request
             form_request = FormRequest.objects.create(
                 request_type=request_type,
@@ -70,26 +70,26 @@ def contact_page(request):
                 message=request.POST.get('message'),
                 status='new'
             )
-            
+
             # Add referral source to message if provided
             referral_source = request.POST.get('referral_source')
             if referral_source:
                 form_request.message = f"How they heard about us: {referral_source}\n\n{form_request.message}"
                 form_request.save()
-            
+
             # Send email notification
             send_mail(
                 subject=f"New Contact Request: {request_type.name}",
                 message=f"""
                 New contact request from {form_request.name} ({form_request.email})
-                
+
                 Request Type: {request_type.name}
                 Company: {form_request.company or 'Not provided'}
                 Phone: {form_request.phone or 'Not provided'}
-                
+
                 Message:
                 {form_request.message}
-                
+
                 ---
                 Thinking Post Training
                 """,
@@ -97,23 +97,23 @@ def contact_page(request):
                 recipient_list=[settings.CONTACT_EMAIL],
                 fail_silently=False,
             )
-            
+
             # Send confirmation to user
             if form_request.email:
                 send_mail(
                     subject="Thank you for contacting Thinking Post Training",
                     message=f"""
                     Dear {form_request.name},
-                    
-                    Thank you for reaching out to us. We have received your {request_type.name.lower()} 
+
+                    Thank you for reaching out to us. We have received your {request_type.name.lower()}
                     and our team will get back to you within 24-48 hours.
-                    
+
                     Your request details:
                     Request Type: {request_type.name}
                     Message: {form_request.message[:200]}...
-                    
+
                     If you have any urgent questions, please call us at +254 724 501 565.
-                    
+
                     Best regards,
                     Thinking Post Training Team
                     """,
@@ -121,20 +121,20 @@ def contact_page(request):
                     recipient_list=[form_request.email],
                     fail_silently=True,
                 )
-            
+
             messages.success(request, "Thank you for your message! We'll get back to you soon.")
             return redirect('contact_success')
-            
+
         except Exception as e:
             messages.error(request, f"An error occurred: {str(e)}")
             # Log the error for debugging
             import logging
             logger = logging.getLogger(__name__)
             logger.error(f"Contact form error: {str(e)}")
-    
+
     # Get all request types for the dropdown
     request_types = RequestType.objects.all().order_by('name')
-    
+
     return render(request, 'home/contact_page.html', {
         'request_types': request_types,
     })
@@ -153,7 +153,7 @@ def index(request):
     paginator = Paginator(posts.order_by('-publish_date'), 9)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    
+
     context = {
         'page_obj': page_obj,
     }
@@ -163,7 +163,7 @@ def index(request):
 def post_detail(request, slug):
     post = get_object_or_404(BlogPost, slug=slug, status='published')
     comments = post.comments.filter(is_approved=True).order_by('-created_at')
-    
+
     # Pagination for comments
     comment_paginator = Paginator(comments, 10)
     comment_page = request.GET.get('comment_page')
@@ -180,7 +180,7 @@ def post_detail(request, slug):
 @require_POST
 def add_comment(request, post_id):
     post = get_object_or_404(BlogPost, id=post_id)
-    
+
     # Handle comment submission
     try:
         comment = Comment(
@@ -198,13 +198,13 @@ def add_comment(request, post_id):
         messages.error(request, f"Error: {', '.join(e.messages)}")
     except Exception as e:
         messages.error(request, f"An error occurred: {str(e)}")
-    
+
     return redirect(post.get_absolute_url())
 
 def tag_view(request, slug):
     tag = get_object_or_404(Tag, slug=slug)  # Use taggit's Tag model
     tagged_posts = BlogPost.objects.filter(tags=tag, status='published').order_by('-publish_date')
-    
+
     context = {
         'tag': tag,
         'tagged_posts': tagged_posts,
@@ -217,7 +217,7 @@ def like_post(request, post_id):
         return JsonResponse({
             'error': 'Please <a href="/accounts/login/">login</a> to like posts'
         }, status=403)
-    
+
     post = get_object_or_404(BlogPost, id=post_id)
     if request.user in post.likes.all():
         post.likes.remove(request.user)
@@ -225,7 +225,7 @@ def like_post(request, post_id):
     else:
         post.likes.add(request.user)
         liked = True
-    
+
     # Return HTML snippet for the button
     return render(request, 'blog/_like_button.html', {
         'post': post,

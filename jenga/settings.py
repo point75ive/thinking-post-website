@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-*1wd*b1zs4%abs@9y+2ng0ta^9ua1+@8pd2)eukd@02e!xt@cm
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['www.thinking-post.com', 'webapp-2573281.pythonanywhere.com']
 
 
 # Application definition
@@ -112,9 +112,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = 'user_management.CustomUser' 
+AUTH_USER_MODEL = 'user_management.CustomUser'
 LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = 'soma:student_home'  
+LOGIN_REDIRECT_URL = 'soma:student_home'
 LOGOUT_REDIRECT_URL = 'jenga_home:home'
 
 # Internationalization
@@ -186,3 +186,9 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'  # Or console for 
 
 # Required for phone number field
 PHONENUMBER_DEFAULT_REGION = 'KE'
+
+
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+PREPEND_WWW = True
