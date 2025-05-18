@@ -1,0 +1,12 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /user/
+Disallow: /summernote/
+Disallow: /accounts/
+Disallow: /enrol/
+Disallow: /register_payments/
+
+Allow: /media/
+Allow: /static/
+
+Sitemap: {{ SITE_URL }}/sitemap.xml
